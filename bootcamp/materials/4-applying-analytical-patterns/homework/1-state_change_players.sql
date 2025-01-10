@@ -1,10 +1,10 @@
--- Create the table to track player state changes
-CREATE TABLE state_change_tracking_players (
-    player_name TEXT,
-    status TEXT,
-    season INTEGER,
-    PRIMARY KEY (player_name, season)
-);
+-- -- Create the table to track player state changes
+-- CREATE TABLE state_change_tracking_players (
+--     player_name TEXT,
+--     status TEXT,
+--     season INTEGER,
+--     PRIMARY KEY (player_name, season)
+-- );
 
 -- DROP TABLE IF EXISTS state_change_tracking_players;
 -- Insert updated player statuses into the tracking table
@@ -20,7 +20,6 @@ WITH
         WHERE season = 2024
           AND player_name IS NOT NULL
     )
-INSERT INTO state_change_tracking_players
 SELECT
     COALESCE(ls.player_name, ts.player_name) AS player_name,
     CASE
@@ -35,6 +34,3 @@ SELECT
 FROM last_season ls
 FULL OUTER JOIN this_season ts
 ON ls.player_name = ts.player_name;
-
-
-SELECT * FROM state_change_tracking_players;
