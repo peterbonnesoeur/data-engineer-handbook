@@ -1,5 +1,5 @@
 -- Create a temporary table for the GROUPING SETS results
-DROP TABLE IF EXISTS temp_grouping_sets;
+-- DROP TABLE IF EXISTS temp_grouping_sets;
 
 CREATE TEMPORARY TABLE temp_grouping_sets AS
 SELECT
@@ -12,11 +12,12 @@ SELECT
 FROM game_details gd
 LEFT JOIN games g ON gd.game_id = g.game_id
 GROUP BY GROUPING SETS (
-    (player_name, player_id,team_id),
+    (player_name, player_id, team_id),
     (player_name, player_id, season),
     (team_id)
 );
 
+SELECT * FROM temp_grouping_sets limit 10;
 
 -- Retrieve the player who scored the most points by team
 SELECT 
